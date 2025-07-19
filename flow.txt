@@ -1,0 +1,98 @@
+1- in cmd : django-admin startproject projectname
+
+
+2- open folder with vs code
+    new terminal
+
+3- craete virtual enviroment
+    python -m venv myenv
+    ./envname/Scripts/Activate
+    (envname) PS C:\Users\Asgardia\Desktop\advanceweb2> pip install django
+
+
+
+
+
+4- python manage.py startapp appname
+
+
+5- add app to the installed apps in setting.py
+    mainfolder > setting.py > INSTALLED_APPS = [
+
+    'base',
+    ]
+
+
+6-introduce template folder
+    create a templates folder in project ROOT
+    mainfolder > setting.py > TEMPLATES = [
+        {
+            'BACKEND': 'django.template.backends.django.DjangoTemplates',
+            'DIRS': [BASE_DIR / 'templates'],  <================================== what you should add here
+            'APP_DIRS': True,
+            'OPTIONS': {
+                'context_processors': [
+                    'django.template.context_processors.debug',
+                    'django.template.context_processors.request',
+                    'django.contrib.auth.context_processors.auth',
+                    'django.contrib.messages.context_processors.messages',
+                    'a_institution_management.context_processors.branches_context',
+                ],
+            },
+        },
+    ]
+
+7- introduce static folder
+    STATICFILES_DIRS = [
+        BASE_DIR / 'static',  <=========== you dont have this by default, write this under STATIC_URL = '/static/'
+
+    ]
+
+8. add urls.py to your app
+    yourapp > create new python file (urls.py)
+
+    mainfolder > urls.py
+
+        from django.contrib import admin
+        from django.urls import path, include
+
+        urlpatterns = [
+            path('admin/', admin.site.urls),
+            path('', include('base.urls'))
+        ]
+
+
+9- addressing
+    in head {% load static %}
+    
+    {% static 'address from static folder' %}
+    {% url 'my_home_url' %}
+
+10- in forms in html files you must place {% csrf_token %}
+
+
+project
+    |
+    |-----  mainprojectfolder (include settings.py)
+    |
+    |-----  app1
+    |-----  app2
+    |-----  app3
+    |-----  .
+    |-----  .
+    |-----  .
+    |-----  appX
+    |
+    |-----  myenv
+    |
+    |-----  templates (html holder)
+    |
+    |-----  static
+    |          |------ css
+    |          |------ js
+    |          |------ assets
+    |
+    |-----  manage.py
+
+
+    session 1
