@@ -5,14 +5,15 @@ from django.http import HttpResponse
 
 def myhomepage(request):
     phone = None
-    username = 'myusernam'
-
+    username = 'yasin'
+    mylist = ['apple', 'bannana', 'orange', 'lemon', 'cherry']
     if request.method == 'POST':
         phone = request.POST.get('phone')
 
     context = {
             'phonekey' : phone,
             'usernamekey' : username,
+            'mylist':mylist,
         }
     
     return render(request,'home.html', context)

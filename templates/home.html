@@ -13,6 +13,25 @@
     <h1>hello world</h1>
     <hr>
     <p>this is my first website home page</p>
+
+    <hr>
+    {% for x in mylist %}
+
+
+    {% if not x == 'apple' %}
+    <div class="card">
+        <img src="" alt="">
+        <h1>{{ x }}</h1>
+        <p></p>
+        <a href=""></a>
+    </div>
+    {% endif %}
+
+
+    {% endfor %}
+
+
+    <hr>
     <br>
     <a href="{% url 'my_login_url' %}">my link to login page</a>
     <br>
