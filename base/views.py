@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-
+from .models import Person
 # Create your views here.
 
 def myhomepage(request):
@@ -9,6 +9,9 @@ def myhomepage(request):
     mylist = ['apple', 'bannana', 'orange', 'lemon', 'cherry']
     if request.method == 'POST':
         phone = request.POST.get('phone')
+
+
+
 
     context = {
             'phonekey' : phone,

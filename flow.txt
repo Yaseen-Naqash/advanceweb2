@@ -95,3 +95,31 @@ project
 
 
     session 1
+
+
+
+    MODEL CREATING 
+        1- write your model class inheriting from models.Model
+        2- python manage.py makemigrations
+        3- python manage.py migrate
+        4- python manage.py createsuperuser
+        
+
+    DJANGO TEMPLATE ENGINE
+        1- {{ variable }}
+
+        2- {% for item in items %}   {{ item.something }}   {% endfor %}
+
+        3- {% if something == {{ variable }}       {% elif %}      {% endif %}
+
+    MAKING DJANGO ADMIN PANEL PERSIAN
+        in settings.py > LANGUAGE_CODE = 'en-us' to LANGUAGE_CODE = 'fa-ir'
+        in settings.py > TIME_ZONE = 'UTC' to TIME_ZONE = 'Asia/Tehran'
+
+
+
+    DJANGO JALALI DATE
+    1- pip install django_jalali
+    2- add it to settings.py before custom apps 'django_jalali',
+    3- in models.py from django_jalali.db import models as jmodels
+    4- wirte you models using jmodels.jDateField(null=True) and jmodels.jDateTimeField(null=True)
