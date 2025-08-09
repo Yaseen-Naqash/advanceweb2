@@ -14,23 +14,38 @@
     <hr>
     <p>this is my first website home page</p>
 
+
+
     <hr>
-    {% for x in mylist %}
 
+    {% if person %}
 
-    {% if not x == 'apple' %}
-    <div class="card">
-        <img src="" alt="">
-        <h1>{{ x }}</h1>
-        <p></p>
-        <a href=""></a>
-    </div>
+        <h1>{{ person.first_name }}</h1>
+
+        {% if person.jalali_date %}
+        <h1>{{ person.jalali_date }}</h1>
+        {% endif %}
+
+    {% else %}
+
+    <h1>there is no such a user</h1>
+
     {% endif %}
 
 
+<hr>
+<hr>
+<hr>
+    {% for user in users %}
+
+    
+    <h2>{{ user.first_name }}</h2>
+
     {% endfor %}
 
-
+<hr>
+<hr>
+<hr>
     <hr>
     <br>
     <a href="{% url 'my_login_url' %}">my link to login page</a>
@@ -43,10 +58,13 @@
     <br>
     <script src="{% static 'js/scripts.js' %}"></script>
     <br>
+    <h2>Login</h2>
+    <hr>
     <form action="" method="POST">
         {% csrf_token %}
 
-        <input type="text" name="phone" placeholder="phone">
+        <input type="text" name="phone" placeholder="phone" required>
+        <input type="password" name="password" placeholder="password" required> 
 
         <button type="submit">submit</button>
     </form>

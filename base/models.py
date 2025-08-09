@@ -22,7 +22,7 @@ class Person(models.Model):
     first_name = models.CharField(max_length=127, null=True, verbose_name='نام')
     last_name = models.CharField(max_length=127, null=True, verbose_name='نام خانوادگی')
     bio = models.TextField(max_length=2047, null=True, blank=True, verbose_name='بیوگرافی')
-    phone = models.CharField(max_length=13, null=True, verbose_name='شماره تلفن')
+    phone = models.CharField(max_length=13, null=True, verbose_name='شماره تلفن', unique=True)
     email = models.EmailField(max_length=127, null=True, verbose_name='ایمیل')
     birthDate = models.DateField( null=True, verbose_name='تاریخ تولد')
     created_at = models.DateTimeField(auto_now_add=True, null=True, verbose_name='تاریخ ثبت')
@@ -44,7 +44,7 @@ class Blog(models.Model):
     title = models.CharField(max_length=127, null=True)
     body = models.TextField(max_length=2047, null=True)
     author = models.ForeignKey(Person, on_delete=models.SET_NULL, null=True, related_name='posts')
-    readers = models.ManyToManyField(Person, related_name='readed_blogs')
+    readers = models.ManyToManyField(Person, related_name='readed_blogs', blank=True)
 
     def __str__(self):
         return self.title + 'written by :' + self.author.first_name + " " + self.author.last_name

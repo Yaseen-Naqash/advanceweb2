@@ -1,3 +1,5 @@
+session 1
+
 1- in cmd : django-admin startproject projectname
 
 
@@ -94,7 +96,7 @@ project
     |-----  manage.py
 
 
-    session 1
+session 2
 
 
 
@@ -123,3 +125,37 @@ project
     2- add it to settings.py before custom apps 'django_jalali',
     3- in models.py from django_jalali.db import models as jmodels
     4- wirte you models using jmodels.jDateField(null=True) and jmodels.jDateTimeField(null=True)
+
+
+session 3
+
+    DJANGO QUERIES 
+        1- Model.objects.get(id=12, username='someusername')
+        2- Model.objects.filter(id=12, username='someusername')
+        3- Model.objects.create(username='someusername', phone='09380242434', password='123456')
+        4- Model.objects.all()
+
+    UPDATING A MODEL
+        somemodel = Model.objects.get(id=12)
+        somemodel.username = 'newusername'
+        somemodel.save()
+
+    DELETING A MODEL
+        somemodel = Model.objects.get(id=12)
+        somemodel.delete()
+
+
+    DJANGO MESSAGES
+        1- from django.contrib import messages
+        2- messages.error(request, 'your message text')
+        3- messages.success(request, 'your message text')
+        4- return redirect('your_name_of_where_you_want_show_your_message')
+        5- in template:
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            
