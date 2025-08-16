@@ -10,10 +10,8 @@
 </head>
 <body>
 
-    <h1>hello world</h1>
+    <h1>login page</h1>
     <hr>
-    <p>this is my first website login page</p>
-    <br>
     {% if messages %}
     <ul class="messages">
         {% for message in messages %}
@@ -21,15 +19,15 @@
         {% endfor %}
     </ul>
     {% endif %}
+
+    <form action="" method="POST" style="display: flex; flex-direction: column; gap: 15px; width: fit-content;">
+        {% csrf_token %}
+        <input type="text" placeholder="username" name="username">
+        <input type="password" placeholder="password" name="password">
+        <button type="submit">login</button>
+    </form>
     
-    <a href="{% url 'my_login_url' %}">my link to login page</a>
-    <br>
-    <a href="{% url 'my_home_url' %}">my link to home page</a>
-    <br>
-    <a href="{% url 'my_register_url' %}">my link to register page</a>
-    <br>
-    <a href="{% url 'my_products_url' %}">my link to products page</a>
-    <br>
+
 
     <script src="{% static 'js/scripts.js' %}"></script>
 </body>

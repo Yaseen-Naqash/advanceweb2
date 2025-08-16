@@ -159,3 +159,56 @@ session 3
             </ul>
             {% endif %}
             
+
+session 4
+
+    DJANGO WITH PILLOW (IMAGE FIELD)
+        1- add these to settings.py 
+            MEDIA_URL = 'media/'
+            MEDIA_ROOT = 'uploaded_images' 
+
+        2- add these to main urls.py
+            from django.conf.urls.static import static
+            from django.conf import settings
+
+            urlpatterns = [...]
+            urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+        3- in your models you can use imageField(upload_to='folder_name')
+
+    USING ABSTRACT USER OF DJANGO
+
+        1- from django.contrib.auth.models import AbstractUser
+
+        2- inherit you model like class ModelName(AbstractUser)
+
+        3- in settings.py add :
+            AUTH_USER_MODEL = 'YourAppName.ModelName'
+
+        4- makemigrations and migrate
+
+    AUTHENTICATING USERS USING PREMADE FUNCTIONS
+            0-  from django.contrib.auth import authenticate, login, logout
+                from django.contrib.auth.decorators import login_required
+
+            1- in your settings.py add :
+                LOGIN_URL = 'my_login_url'
+
+
+            2- you need login_function() , logout_function()
+
+            3- def login_function():
+                    user = authenticate(username='someusername', password='somepassword')
+                        if user is not None:
+                            login(request, user)
+                        else:
+                            print('some error messages')
+                            return redirect('login_url_name')
+
+            4- def logout_function():
+                logout(request)
+                return redirect('login_url_name')
+
+            5- add these urls :
+                    path('login/',login_function, name='my_login_url'),
+                    path('logout/',logout_function , name='my_logout_url'),

@@ -3,46 +3,50 @@ from django.http import HttpResponse
 from .models import Person, Blog
 from django.contrib import messages
 
+
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+
 # Create your views here.
+# @login_required
+def home(request):
 
-def myhomepage(request):
-    # Person.objects.get() ✅
-    # Person.objects.filter() ✅
-    # Person.objects.all() ✅
-    # Person.objects.get_or_create() ✅
-    # Person.objects.create() ✅
-
-    phone = None
-    myPerson = None
-    username = 'yasin'
-    mylist = ['apple', 'bannana', 'orange', 'lemon', 'cherry']
-    if request.method == 'POST':
-        phone = request.POST.get('phone')
-        password = request.POST.get('password')
-        if Person.objects.filter(phone=phone,password=password).exists():
-            myPerson = Person.objects.get(phone=phone,password=password)
-            # myPerson.delete()
-            # myPerson.password = '258456'
-            # myPerson.save()
-
-
-    
-
-
-
+    blogs = Blog.objects.all()
+    # users = Person.objects.all()
+    # for user in users:
+    #     user.set_password(user.password)
+    #     user.save()
 
     context = {
-            'phonekey' : phone,
-            'usernamekey' : username,
-            'mylist':mylist,
-            'person':myPerson,
-            'users':allofUsers,
-        }
+        'blogs':blogs,
+    }
     
     return render(request,'home.html', context)
 
 def login_page(request):
+    if request.method == 'POST':
+
+        myusername = request.POST.get('username')
+        mypassword = request.POST.get('password')
+        user = authenticate(username=myusername,password=mypassword)
+        if user is not None:
+
+            login(request, user)
+            messages.success(request,'your logged in successfully')
+
+            return redirect('my_home_url')
+        else:
+            messages.error(request,'username or password is wrong!')
+            return redirect('my_login_url')
     return render( request , 'login.html')
+
+
+def logout_command(request):
+    logout(request)
+    messages.success(request,'your logged out successfully!')
+
+    return redirect('my_login_url')
+
 
 def register_page(request):
 
@@ -71,6 +75,8 @@ def register_page(request):
             is_stuff = False,
             
         )
+        user.set_password(password1)
+        user.save()
         messages.success(request, 'user created')
         return redirect('my_login_url')
         # user.save()
@@ -85,5 +91,5 @@ def register_page(request):
 
     return render(request ,'register.html')
 
-def products(request):
-    return render(request, 'products.html')
+def details(request):
+    return render(request, 'details.html')

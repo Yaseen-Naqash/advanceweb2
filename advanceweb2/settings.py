@@ -131,3 +131,13 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+MEDIA_URL = 'media/'
+MEDIA_ROOT = 'uploaded_images'
+
+
+AUTH_USER_MODEL = 'base.Person'
+
+LOGIN_URL = 'my_login_url'
+# LOGIN_REDIRECT_URL = 'my_home_url'
+# LOGOUT_REDIRECT_URL = 

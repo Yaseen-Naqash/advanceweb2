@@ -1,3 +1,46 @@
-h1{
-    color: red;
+
+
+
+nav a{
+    text-decoration: none;
+    padding: 10px;
+    background-color: rgb(0, 85, 175);
+    border-radius: 10px;
+    color: white;
+
 }
+
+.blogs{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+}
+
+.blog{
+    background-color: rgb(204, 204, 204);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+
+
+}
+
+.blog img{
+    width: 25%;
+    height: 350px;
+}
+
+.blog h1{
+    margin: 10px;
+}
+.blog p{
+    margin: 10px;
+}
+
+.content{
+    display: flex;
+    flex-direction: column;
+}
+
