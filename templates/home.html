@@ -16,14 +16,14 @@
         {% if request.user.is_authenticated %}
                 <h3>{{ request.user.username }}</h3>
                 <a href="{% url 'my_logout_url' %}">LOGOUT</a>
+                <a href="{% url 'my_create_url' %}">CREATE</a>
+
 
 
         {% else %}
                 <a href="{% url 'my_login_url' %}">login</a>
                 <a href="{% url 'my_register_url' %}">register</a>
         {% endif %}
-
-
 
 
     </nav>
@@ -39,7 +39,7 @@
     <section class="blogs">
 
         {% for blog in blogs %}
-
+        
         <div class="blog">
             {% if blog.image %}
             <img src="{{ blog.image.url }}" alt="">
@@ -49,6 +49,12 @@
                 <h1>{{ blog.title }}</h1>
                 <p>{{ blog.body }}</p>
             </div>
+            <a href="{% url 'my_details_url' blog.id %}" style="position: absolute; right: 40px; bottom: 20px;">details</a>
+            {% if request.user == blog.author %}
+            <a href="{% url 'my_update_url' blog.id %}" style="position: absolute; right: 120px; bottom: 20px;">update</a>
+            <a href="{% url 'my_delete_url' blog.id %}" style="position: absolute; right: 200px; bottom: 20px;">delete</a>
+
+            {% endif %}
         </div>
 
         {% endfor %}

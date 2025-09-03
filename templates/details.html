@@ -10,18 +10,9 @@
 </head>
 <body>
 
-    <h1>hello world</h1>
-    <hr>
-    <p>this is my first website products page</p>
-    <br>
-    <a href="{% url 'my_login_url' %}">my link to login page</a>
-    <br>
-    <a href="{% url 'my_home_url' %}">my link to home page</a>
-    <br>
-    <a href="{% url 'my_register_url' %}">my link to register page</a>
-    <br>
-    <a href="{% url 'my_products_url' %}">my link to products page</a>
-    <br>
+    <h1>{{blog.title}}</h1>
+    <p>{{blog.body}}</p>
+    <img src="{{blog.image.url}}" alt="">
 
     <script src="{% static 'js/scripts.js' %}"></script>
 </body>

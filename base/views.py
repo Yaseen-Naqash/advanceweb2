@@ -8,7 +8,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
-# @login_required
+@login_required
 def home(request):
 
     blogs = Blog.objects.all()
@@ -91,5 +91,82 @@ def register_page(request):
 
     return render(request ,'register.html')
 
-def details(request):
-    return render(request, 'details.html')
+def details(request,pk):
+
+
+    blog = Blog.objects.get(id=pk)
+    context = {
+        'blog':blog,
+    }
+    return render(request, 'details.html', context)
+
+def create_blog(request):
+    if not request.user.is_authenticated:
+        return HttpResponse('403')
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        body = request.POST.get('body')
+        author = request.POST.get('author')
+        image = request.FILES.get('image')
+
+        user = Person.objects.get(id=author)
+
+        blog = Blog.objects.create(
+            title=title,
+            body=body,
+            author=user,
+            image=image,
+        )
+        messages.success(request, 'blog created')
+
+        return redirect('my_home_url')
+    
+
+    users = Person.objects.all()
+    context = {'users':users}
+    return render(request, 'create.html', context)
+
+
+def update_blog(request, pk):
+    blog = Blog.objects.get(id=pk)
+    users = Person.objects.all()
+    if not request.user == blog.author:
+        return HttpResponse('403')
+    context = {
+        'blog':blog,
+        'users':users,
+    }
+
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        body = request.POST.get('body')
+        author = request.POST.get('author')
+        image = request.FILES.get('image')
+        
+        user = Person.objects.get(id=author)
+        blog = Blog.objects.get(id=pk)
+        print(author)
+        blog.title=title
+        blog.body=body
+        blog.author=user
+        if image:
+            blog.image=image
+
+        blog.save()
+        
+
+        messages.success(request, 'blog updated')
+
+        return redirect('my_home_url')
+
+
+
+    return render(request, 'update.html', context)
+
+def delete_blog(request, pk):
+    blog = Blog.objects.get(id=pk)
+    if not request.user == blog.author:
+        return HttpResponse('403')
+    blog.delete()
+    messages.success(request, 'blog deleted')
+    return redirect('my_home_url')

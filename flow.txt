@@ -212,3 +212,19 @@ session 4
             5- add these urls :
                     path('login/',login_function, name='my_login_url'),
                     path('logout/',logout_function , name='my_logout_url'),
+
+    
+session 5
+    DETIALS VIEW
+        1- in views.py define a function : def details(request,pk):
+                blog = Blog.objects.get(id=pk)
+                context = {
+                    'blog':blog,
+                }
+                return render(request, 'details.html', context)
+
+        2- in urls.py ==>   path('details/<int:pk>/',details, name='my_details_url')
+        3- <a href="{% url 'my_details_url' blog.id %}">link to that detail</a>
+
+    HANDLING FILE UPLOAD IN FORMS SHOULD HAVE THIS IN ITS ATTRIBUTES
+        <form action="" method="POST" enctype="multipart/form-data">
