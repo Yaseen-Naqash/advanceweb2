@@ -7,6 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <style>
+        nav input{
+            padding: 5px;
+            border: 3px solid black;
+            margin: 20px 0px;
+        }
+    </style>
 </head>
 <body>
 
@@ -15,6 +22,9 @@
         
         {% if request.user.is_authenticated %}
                 <h3>{{ request.user.username }}</h3>
+                <h3>{{ request.user.get_experience_display }}</h3>
+
+
                 <a href="{% url 'my_logout_url' %}">LOGOUT</a>
                 <a href="{% url 'my_create_url' %}">CREATE</a>
 
@@ -25,7 +35,11 @@
                 <a href="{% url 'my_register_url' %}">register</a>
         {% endif %}
 
+        <form action="" method="GET">
+            <input type="text" name="q" id="" placeholder="search" value='{{request.GET.q}}'>
+            <button type="submit">GO</button>
 
+        </form>
     </nav>
 
     <hr style="margin: 20px;">

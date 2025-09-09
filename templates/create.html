@@ -4,12 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <style>
+        /* form input{
+            background-color: blue;
+        } */
+    </style>
 </head>
 <body>
 
     <form action="" method="POST" enctype="multipart/form-data" style="display: flex; flex-direction: column; width: fit-content; gap: 15px;">
         {% csrf_token %}
-        <input type="file" name="image">
+
+        {{ form }}
+        <!-- <input type="file" name="image">
         <input type="text" placeholder="title" name="title">
         <textarea name="body" id="" placeholder="body"></textarea>
         <hr>
@@ -20,7 +28,7 @@
                 <option value="{{user.id}}">{{user.username}}</option>
             {% endfor %}
 
-        </select>
+        </select> -->
         <button type="submit">create</button>
     </form>
 

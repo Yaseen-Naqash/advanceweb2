@@ -15,7 +15,7 @@ class BlogAdmin(admin.ModelAdmin):
     list_display_links = ['created_at']
     list_display = ['title', 'author', 'created_at']
     list_filter = ['author']
-    search_fields = ['title', 'body']
+    # search_fields = ['title', 'body']
     list_editable = ['title', 'author']
     fieldsets = [
         (
@@ -35,7 +35,7 @@ class BlogAdmin(admin.ModelAdmin):
  
     # details view settings
     readonly_fields = ['title']
-    autocomplete_fields = ['author']
+    # autocomplete_fields = ['author']
     
 
     pass
@@ -43,7 +43,7 @@ admin.site.register(Blog, BlogAdmin)
 
 
 
-admin.site.register(Person, UserAdmin)
+admin.site.register(Person)
 
 
 

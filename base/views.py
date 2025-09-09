@@ -2,7 +2,9 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Person, Blog
 from django.contrib import messages
+from .forms import BlogForm
 
+from django.db.models import Q
 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -10,8 +12,10 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 @login_required
 def home(request):
+    
+    query = request.GET.get('q') if request.GET.get('q') != None else ''
 
-    blogs = Blog.objects.all()
+    blogs = Blog.objects.filter(Q(body__icontains = query) | Q(title__icontains = query))
     # users = Person.objects.all()
     # for user in users:
     #     user.set_password(user.password)
@@ -101,29 +105,48 @@ def details(request,pk):
     return render(request, 'details.html', context)
 
 def create_blog(request):
+
     if not request.user.is_authenticated:
         return HttpResponse('403')
+
+
     if request.method == 'POST':
-        title = request.POST.get('title')
-        body = request.POST.get('body')
-        author = request.POST.get('author')
-        image = request.FILES.get('image')
 
-        user = Person.objects.get(id=author)
+        form = BlogForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'blog created')
 
-        blog = Blog.objects.create(
-            title=title,
-            body=body,
-            author=user,
-            image=image,
-        )
-        messages.success(request, 'blog created')
+            return redirect('my_home_url')
 
-        return redirect('my_home_url')
+
+        # title = request.POST.get('title')
+        # body = request.POST.get('body')
+        # author = request.POST.get('author')
+        # image = request.FILES.get('image')
+        # user = Person.objects.get(id=author)
+
+        # blog = Blog.objects.create(
+        #     title=title,
+        #     body=body,
+        #     author=user,
+        #     image=image,
+        # )
+        # messages.success(request, 'blog created')
+
+        # return redirect('my_home_url')
+
+    else:
+        form = BlogForm()
+
+
     
 
     users = Person.objects.all()
-    context = {'users':users}
+    context = {
+        'users':users,
+        'form':form,
+    }
     return render(request, 'create.html', context)
 
 
@@ -145,7 +168,6 @@ def update_blog(request, pk):
         
         user = Person.objects.get(id=author)
         blog = Blog.objects.get(id=pk)
-        print(author)
         blog.title=title
         blog.body=body
         blog.author=user
