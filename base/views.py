@@ -53,7 +53,6 @@ def logout_command(request):
 
 
 def register_page(request):
-
     if request.method == 'POST':
         firstName = request.POST.get('firstName')
         lastName = request.POST.get('lastName')

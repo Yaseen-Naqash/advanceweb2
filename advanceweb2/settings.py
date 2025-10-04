@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-vcmfjj)mc12m%dopqtpdni3_p1rjd@r4&i!0fxr^0wsr&vb^x#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['WWWW.YOURDOMAIN.IR', 'YOURDOMAIN.IR']
 
 
 # Application definition
@@ -124,8 +124,8 @@ STATICFILES_DIRS = [
 ]
 import os
 # Location where collected static files will be stored for production (run 'collectstatic' to populate this)
-STATIC_ROOT = BASE_DIR / 'staticfiles'  # This is where Django will collect all static files for deployment
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# STATIC_ROOT = BASE_DIR / 'staticfiles'  # This is where Django will collect all static files for deployment
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -137,7 +137,7 @@ MEDIA_ROOT = 'uploaded_images'
 
 
 AUTH_USER_MODEL = 'base.Person'
-
+    
 LOGIN_URL = 'my_login_url'
 # LOGIN_REDIRECT_URL = 'my_home_url'
 # LOGOUT_REDIRECT_URL = 
